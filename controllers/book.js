@@ -46,3 +46,11 @@ exports.createBook = (req, res, next) => {
       .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
       .catch(error => res.status(400).json({ error }));
   }
+
+  exports.getTopThreeBooks = (req, res, next) => {
+
+  }
+
+  exports.postBookRating = (req, res, next) => {
+    
+  }
