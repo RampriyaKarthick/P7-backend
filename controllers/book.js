@@ -1,9 +1,10 @@
 const Book = require('../models/book')
 
+
 exports.createBook = (req, res, next) => {
    
     const book = new Book({
-       
+        userId: req.body._id,
         title:req.body.title,
         author : req.body.author,
         imageUrl : req.body.imageUrl,
@@ -11,7 +12,7 @@ exports.createBook = (req, res, next) => {
         genre:req.body.genre,
         ratings : [
         {
-        userId: req.body.userId,
+        userId: req.body._id,
         grade :req.body.grade,
         }
         ],
