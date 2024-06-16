@@ -2,8 +2,10 @@ const express = require('express');
 
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 const Book = require('./models/book');
 const bookRoutes = require('./routes/book');
+const userRoutes = require('./routes/user');
 
 mongoose.connect('mongodb+srv://rampriyakarthick:0xRY9RCXk8trgylI@cluster0.uwfvjpp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true,
@@ -12,14 +14,17 @@ mongoose.connect('mongodb+srv://rampriyakarthick:0xRY9RCXk8trgylI@cluster0.uwfvj
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(express.json());
+app.use(cors());
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-  });
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+//     next();
+//   });
 
   app.use('/api/books', bookRoutes);
+
+  app.use('/api/auth', userRoutes);
 
 module.exports = app;

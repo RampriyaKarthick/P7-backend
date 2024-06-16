@@ -3,7 +3,7 @@ const Book = require('../models/book')
 exports.createBook = (req, res, next) => {
    
     const book = new Book({
-        userId: req.body.userId,
+       
         title:req.body.title,
         author : req.body.author,
         imageUrl : req.body.imageUrl,
@@ -18,7 +18,7 @@ exports.createBook = (req, res, next) => {
         averageRating : req.body.averageRating,
         }
         ) 
-    Book.save()
+    book.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch((error) => res.status(400).json({ error :error}));
   };
