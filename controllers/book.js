@@ -31,8 +31,16 @@ exports.createBook = (req, res, next) => {
   }
 
   exports.getSingleBook = (req, res, next) => {
+    console.log('Received request for book ID:', req.params.id);
     Book.findOne({ _id: req.params.id })
-      .then(book => res.status(200).json(book))
+        .then(book => {
+            if (!book) {
+                console.log('Book not found');
+                return res.status(404).json({ error: 'Book not found' });
+            }
+            console.log('Book found:', book);
+            res.status(200).json(book);
+        })
       .catch(error => res.status(404).json({ error }));
   }
 
