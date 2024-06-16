@@ -6,6 +6,8 @@ const cors = require('cors');
 const Book = require('./models/book');
 const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
+const path = require('path');
+const fs = require('fs');
 
 mongoose.connect('mongodb+srv://rampriyakarthick:0xRY9RCXk8trgylI@cluster0.uwfvjpp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true,
@@ -15,6 +17,12 @@ mongoose.connect('mongodb+srv://rampriyakarthick:0xRY9RCXk8trgylI@cluster0.uwfvj
 
 app.use(express.json());
 app.use(cors());
+const imagesDir = path.join(__dirname, 'images');
+if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
+}
+app.use('/images', express.static(imagesDir));
+
 
 // app.use((req, res, next) => {
 //     res.setHeader('Access-Control-Allow-Origin', '*');
