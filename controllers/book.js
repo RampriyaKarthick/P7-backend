@@ -13,9 +13,11 @@ exports.createBook = (req, res, next) => {
   const book = new Book({
     ...bookObject,
     userId,
-    imageUrl:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+   
+    imageUrl:`${req.protocol}://${req.get('host')}/${req.file.path}`,
 
 });
+console.log("req file", req.file)
 
     book.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
