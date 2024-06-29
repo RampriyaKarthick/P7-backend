@@ -31,7 +31,7 @@ module.exports = (req, res, next) => {
       return next();
     }
 
-    const filename = req.file.originalname.split(' ').join('_') + Date.now() + '.' + MIME_TYPES[req.file.mimetype];
+    const filename = req.file.originalname.split(' ').join('_') + Date.now() + '.webp';
 
     sharp(req.file.buffer)
       .resize(500, 500, { fit: 'fill' }) 
