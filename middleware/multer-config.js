@@ -4,7 +4,8 @@ const sharp = require('sharp');
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
-  'image/png': 'png'
+  'image/png': 'png',
+  'image/webp': 'webp'
 };
 
 const storage = multer.memoryStorage();
@@ -34,6 +35,7 @@ module.exports = (req, res, next) => {
 
     sharp(req.file.buffer)
       .resize(500, 500, { fit: 'fill' }) 
+      .toFormat('webp')
       .toFile(`images/${filename}`)
       .then(() => {
         req.file.path = `images/${filename}`;
