@@ -54,7 +54,7 @@ exports.updateEachBook = (req, res, next) => {
     try {
           bookObject = {
               ...JSON.parse(req.body.book),
-              imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+              imageUrl: `${req.protocol}://${req.get('host')}/${req.file.path}`
           };
       } catch (error) {
           console.error('Error parsing request body:', error);
